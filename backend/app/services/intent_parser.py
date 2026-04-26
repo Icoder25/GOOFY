@@ -70,6 +70,7 @@ class IntentParser:
         heuristics = [
             self._match_system_screenshot,
             self._match_system_volume,
+            self._match_system_media,
             self._match_system_type,
             self._match_system_press,
             self._match_system_open_app,
@@ -142,6 +143,28 @@ class IntentParser:
             confidence=self._confidence(alias or f"volume {action}", original),
             matched_alias=alias or f"volume {action}",
             response=f"Adjusting volume {action if action else ''}.",
+        )
+
+    def _match_system_media(self, normalized: str, original: str) -> Optional[ParsedCommand]:
+        alias = self._match_alias("system.media", normalized)
+        action: Optional[str] = None
+        
+        if re.search(r"\b(play|pause)\b", normalized):
+            action = "playpause"
+        elif re.search(r"\b(next|skip)\b", normalized):
+            action = "nexttrack"
+        elif re.search(r"\b(previous|back|last)\b", normalized):
+            action = "prevtrack"
+
+        if not action and not alias:
+            return None
+
+        return ParsedCommand(
+            intent="system.media",
+            parameters={"action": action},
+            confidence=self._confidence(alias or f"media {action}", original),
+            matched_alias=alias or f"media {action}",
+            response=f"Media {action}.",
         )
 
     def _match_system_type(self, normalized: str, original: str) -> Optional[ParsedCommand]:

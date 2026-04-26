@@ -52,3 +52,14 @@ def test_open_app_intent():
     parsed_false = intent_parser.parse("i want to keep the window open")
     if parsed_false:
         assert parsed_false.intent != "system.open_app"
+
+def test_media_intent():
+    parsed_play = intent_parser.parse("goofy play the music")
+    assert parsed_play is not None
+    assert parsed_play.intent == "system.media"
+    assert parsed_play.parameters["action"] == "playpause"
+
+    parsed_next = intent_parser.parse("next track please")
+    assert parsed_next is not None
+    assert parsed_next.intent == "system.media"
+    assert parsed_next.parameters["action"] == "nexttrack"

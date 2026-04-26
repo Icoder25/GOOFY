@@ -200,6 +200,11 @@ class AssistantEngine(QObject):
                 elif action in ["mute", "unmute"]:
                     pyautogui.press("volumemute")
                     success = True
+            elif intent == "system.media":
+                action = params.get("action")
+                if action in ["playpause", "nexttrack", "prevtrack"]:
+                    pyautogui.press(action)
+                    success = True
             elif intent == "search.google":
                 query = params.get("query")
                 if query:
