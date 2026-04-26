@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "0.2.0",
+  "description": "System-wide intent schema for Goofy Voice OS Agent",
+  "intents": [
+    {
+      "intent": "system.open_app",
+      "description": "Open a desktop application",
+      "aliases": ["open", "launch", "start", "run"],
+      "parameters": {
+        "app_name": {
+          "type": "string",
+          "required": true,
+          "description": "Name of the application to open"
+        }
+      },
+      "examples": ["open notepad", "launch chrome", "start calculator"]
+    },
+    {
+      "intent": "system.screenshot",
+      "description": "Take a full screen screenshot",
+      "aliases": ["take a screenshot", "capture screen", "screenshot"],
+      "parameters": {},
+      "examples": ["take a screenshot", "capture the screen"]
+    },
+    {
+      "intent": "system.type",
+      "description": "Type text into the active window",
+      "aliases": ["type", "write", "enter text"],
+      "parameters": {
+        "text": {
+          "type": "string",
+          "required": true,
+          "description": "Text to type"
+        }
+      },
+      "examples": ["type hello world", "write a quick note"]
+    },
+    {
+      "intent": "system.press",
+      "description": "Press a specific keyboard key",
+      "aliases": ["press", "hit"],
+      "parameters": {
+        "key": {
+          "type": "string",
+          "required": true,
+          "description": "Key to press (e.g. enter, space, win)"
+        }
+      },
+      "examples": ["press enter", "hit space"]
+    },
+    {
+      "intent": "system.volume",
+      "description": "Adjust system volume",
+      "aliases": ["volume up", "volume down", "mute", "unmute"],
+      "parameters": {
+        "action": {
+          "type": "string",
+          "required": true,
+          "enum": ["up", "down", "mute", "unmute"]
+        }
+      },
+      "examples": ["volume up", "mute system", "turn volume down"]
+    },
+    {
+      "intent": "search.google",
+      "description": "Search on Google using default browser",
+      "aliases": ["search for", "google", "look up"],
+      "parameters": {
+        "query": {
+          "type": "string",
+          "required": true,
+          "description": "Search query"
+        }
+      },
+      "examples": ["search for weather", "google pizza recipe"]
+    },
+    {
+      "intent": "system.run_powershell",
+      "description": "Execute a powershell command",
+      "aliases": ["run powershell", "execute script"],
+      "parameters": {
+        "script": {
+          "type": "string",
+          "required": true,
+          "description": "Powershell command or script"
+        }
+      },
+      "examples": ["run powershell get-process"]
+    },
+    {
+      "intent": "conversation.chat",
+      "description": "General conversation or greeting",
+      "aliases": ["hello", "hi", "how are you", "who are you"],
+      "parameters": {},
+      "examples": ["hello goofy", "how is it going"]
+    }
+  ],
+  "metadata": {
+    "createdAt": "2026-04-27",
+    "phase": "System-Wide",
+    "confidenceThreshold": 0.6
+  }
+}
